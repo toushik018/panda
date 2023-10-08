@@ -14,11 +14,19 @@
 
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-gray-800">
 
-  <nav>
-    
-  </nav>
+  <nav class="bg-gray-300 dark:bg-slate-700 p-4">
+    <div class="flex justify-end items-center">
+      <button id="dark-mode-toggle" class="dark:bg-gray-800 dark:text-gray-100 bg-gray-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+        <span id="toggle-icon">
+          <i id="dark-icon" class="fas fa-moon text-2xl"></i>
+          <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
+        </span>
+        <span id="toggle-label"></span>
+      </button>
+    </div>
+</nav>
 
   <div class="bg-red-100 text-red-700 py-2 px-4 mb-4 rounded-md w-full lg:w-1/5 text-center mx-auto mt-8">
     <p>Warning message goes here</p>
@@ -266,6 +274,7 @@
 
 
     <script src="distribution.js"></script>
+    <script src="AdminDarkLight.js"></script>
 
 </body>
 </html>
