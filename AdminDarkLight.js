@@ -1,7 +1,9 @@
 
 // Function to toggle dark mode
 function toggleDarkMode() {
+    console.log('Toggle dark mode function called');
     var html = document.documentElement;
+    console.log('html element:', html);
     var toggleLabel = document.getElementById("toggle-label");
     var darkIcon = document.getElementById("dark-icon");
     var lightIcon = document.getElementById("light-icon");
@@ -17,16 +19,16 @@ function toggleDarkMode() {
     if (html.classList.contains("dark")) {
         toggleLabel.textContent = "";
         // Store the current mode in local storage or cookies
-        localStorage.setItem("darkMode", "enabled");
+        localStorage.setItem("adminDarkMode", "enabled");
     } else {
         toggleLabel.textContent = "";
         // Store the current mode in local storage or cookies
-        localStorage.setItem("darkMode", "disabled");
+        localStorage.setItem("adminDarkMode", "disabled");
     }
 }
 
 // Check for the current mode in local storage
-var currentMode = localStorage.getItem("darkMode");
+var currentMode = localStorage.getItem("adminDarkMode");
 
 // Set the initial mode based on local storage
 if (currentMode === "enabled") {
