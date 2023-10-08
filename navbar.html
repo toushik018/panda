@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="navbar.css">
+    <link href="/dist/output.css" rel="stylesheet">
+    <style>
+        /* Add CSS transitions */
+        #mobileMenu {
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+    
+        .menu-open #mobileMenu {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      </style>
+
+</head>
+
+<body>
+
+    <header class="bg-gray-200 dark:bg-gray-600">
+        <div
+            class="mx-auto flex flex-col lg:flex-row md:flex-row items-center justify-between py-4 px-8 max-w-7xl pt-4">
+            <div class="flex items-center">
+                <a href="#" class="text-xl font-bold text-red-500 hover:text-red-700 mr-10">Logo</a>
+                <div class="lg:ml-10 font-bold">
+                    <h1 class="text-2xl text-gray-900 dark:text-white">Main Heading</h1>
+                    <h3 class="text-xl text-gray-900 dark:text-white">Sub heading</h3>
+                </div>
+            </div>
+            <div class="hidden lg:block md:block">
+                <div class="button button-style dark:text-white">Contact</div>
+                <button id="dark-mode-toggle" class="dark:bg-gray-800 dark:text-gray-100 bg-gray-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+                    <span id="toggle-icon">
+                      <i id="dark-icon" class="fas fa-moon text-2xl"></i>
+                      <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
+                    </span>
+                    <span id="toggle-label"></span>
+                  </button>
+            </div>
+
+          
+              
+      
+
+        </div>
+    </header>
+
+    <nav class="p-4 mx-auto bg-gray-100 dark:bg-gray-800 w-full">
+        <div class="flex justify-between items-center text-gray-600 dark:text-gray-100 font-medium">
+            <!-- Mobile menu button -->
+            <button id="menuBtn" class="lg:hidden md:hidden cursor-pointer focus:outline-none absolute top-8 left-6">
+                <i class="fas fa-bars text-3xl text-black dark:text-white"></i>
+            </button>
+
+            <div id="navLinks" class="lg:flex space-x-10 mx-auto hidden md:block">
+                <!-- Navigation links (desktop) -->
+                <ul class="flex md:space-x-5 lg:space-x-10">
+                    <li><a href="index.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Home</a></li>
+                    <li class="relative group dropdown">
+                        <a href="#" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all dropbtn" id="productBtn">Invest <i
+                                class="fas fa-caret-down"></i></a>
+                        <!-- Dropdown Content -->
+                        <div class="dropdown-content">
+                            <a href="#">Buy Panda</a>
+                            <a href="#">Delegate</a>
+
+                        </div>
+                    </li>
+                    <li><a href="rewards.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Rewards</a></li>
+                    <li><a href="discover.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Discover</a></li>
+                    <li><a href="delegator.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Delegator</a></li>
+                    <li><a href="richList.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Rich List</a></li>
+                    <li><a href="aboutUs.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobileMenu"
+        class="lg:hidden hidden bg-gray-200 dark:bg-gray-800 absolute inset-0 transition-opacity ease-in-out duration-500 transform translate-y-[-10px] z-50">
+        <div class="flex flex-col items-center justify-center mt-20">
+            <button id="closeBtn" class="lg:hidden cursor-pointer focus:outline-none absolute top-8 left-8">
+                <i class="fas fa-times text-3xl text-black dark:text-white"></i>
+            </button>
+            <ul class="space-y-4 text-center">
+                <li><a href="index.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-4 rounded-md block">Home</a>
+                </li>
+                <li class="relative group dropdown">
+                    <a href="#" class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-6 rounded-md block"
+                        id="productBtnMobile">Invest <i class="fas fa-caret-down"></i> </a>
+                    <!-- Dropdown Content -->
+                    <div class="dropdown-content">
+                        <a href="#">Buy Panda</a>
+                        <a href="#">Delegate</a>
+
+                    </div>
+                </li>
+                <li><a href="rewards.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-4 rounded-md block">Rewards</a>
+                </li>
+                <li><a href="discover.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-4 rounded-md block">Discover</a>
+                </li>
+                <li><a href="delegator.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-4 rounded-md block">Delegator</a>
+                </li>
+                <li><a href="richList.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-4 rounded-md block">Rich
+                        List</a></li>
+                <li><a href="aboutUs.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 py-2 px-4 rounded-md block">About
+                        Us</a></li>
+            </ul>
+
+
+            <div class="lg:hidden button button-style text-xl mt-8">Contact</div>
+            <button id="dark-mode-toggle" class="dark:bg-gray-800 dark:text-gray-100 bg-gray-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+                <span id="toggle-icon">
+                  <i id="dark-icon" class="fas fa-moon text-2xl"></i>
+                  <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
+                </span>
+                <span id="toggle-label"></span>
+              </button>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.getElementById("menuBtn").addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobileMenu");
+          mobileMenu.classList.remove("hidden");
+    
+          setTimeout(function () {
+            document.body.classList.add("menu-open");
+          }, 10);
+        });
+    
+        document.getElementById("closeBtn").addEventListener("click", function () {
+          const mobileMenu = document.getElementById("mobileMenu");
+          document.body.classList.remove("menu-open");
+    
+          setTimeout(function () {
+            mobileMenu.classList.add("hidden");
+          }, 300);
+        });
+
+
+
+      
+
+      </script>
+      <script src="dark-mode.js"></script>
+
+</body>
+
+</html>
