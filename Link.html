@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link</title>
+    <link href="dist/output.css" rel="stylesheet" />
+    <!-- Add the Tailwind CSS CDN if you haven't already -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="dark:bg-custom-dark bg-custom-bg mb-10">
+
+    <nav class="dark:bg-custom-dark bg-custom-bg p-4">
+        <div class="flex justify-end items-center gap-4">
+            <a href="#" class="text-xl font-bold dark:text-gray-100 hidden md:block transition duration-300 ease-in-out transform hover:scale-105">
+                Login
+            </a>            
+            <button id="dark-mode-toggle" class="dark:bg-blue-950 dark:text-gray-100 bg-teal-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+                <span id="toggle-label">Dark Mode</span>
+            </button>
+            
+        </div>
+    </nav>
+
+
+    <section class=" py-16">
+        <div class="mx-auto flex flex-col items-center justify-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-48 gap-4 px-2">
+    
+                <!-- 1: Each Panda Token Points -->
+                <div class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg shadow-md text-center">
+                    <h2 class="text-2xl font-semibold mt-5">Each Panda Token Points = X points</h2>
+                </div>
+    
+                <!-- 2: Sourov's HP Staked -->
+                <div class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg shadow-md text-center">
+                    <h2 class="text-2xl font-semibold mb-4">Sourov's HP Staked = 1000</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            
+            <!-- 3: Each Vote Value and Active Hive Power -->
+            <div class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg text-center mt-12 border border-gray-300 dark:border-gray-500">
+                <h2 class="text-2xl font-semibold mb-4">Each Vote Value = 1005 Points</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-100">Active Hive Power + Staked Panda Token</p>
+            </div>
+
+              <!-- Timer -->
+              <div class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg text-center mt-8 border border-gray-300 dark:border-gray-500">
+                <h2 class="text-2xl font-semibold">3:50 hours left</h2>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container mx-auto px-1">
+            <div class="mb-4 flex lg:justify-between justify-around">
+                <button id="currentButton" class="bg-gray-300 dark:bg-gray-800 text-gray-800 dark:text-gray-100 py-2 px-4 rounded-full hover:bg-gray-400 transition duration-300 ease-in-out mb-2 md:mb-0 font-semibold">Current</button>
+                <button id="prevButton" class="bg-gray-300 dark:bg-gray-800 text-gray-800 dark:text-gray-100 py-2 px-4 rounded-full hover:bg-gray-400 transition duration-300 ease-in-out mb-2 md:mb-0 font-semibold">Previous</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-300 dark:bg-gray-500 text-gray-800 dark:text-gray-100">
+                        <tr>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Ranking</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Username</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Posts</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Nominated By</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Category</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Current Point</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Support</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        <!-- tr will be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <div id="pagination-section" class="flex justify-center items-center gap-6 mt-4">
+                <button
+                    id="prevPage"
+                    class="bg-gray-300 dark:bg-gray-600 dark:hover-bg-gray-500 dark:text-gray-100 hover-bg-gray-400 py-2 px-4 rounded-md focus:outline-none pagination-tooltip mb-2 md:mb-0"
+                    disabled
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <div class="text-gray-600 dark:text-gray-100">
+                    Page <span id="currentPage" class="font-semibold">1</span> of
+                    <span id="totalPages" class="font-semibold">5</span>
+                </div>
+                <button
+                    id="nextPage"
+                    class="bg-gray-300 dark:bg-gray-600 dark:hover-bg-gray-500 dark:text-gray-100 hover-bg-gray-400 py-2 px-4 rounded-md focus:outline-none pagination-tooltip"
+                >
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+
+    <script src="link.js"></script>
+    <script src="AdminDarkLight.js"></script>
+    
+</body>
+</html>

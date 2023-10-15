@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curation</title>
+    <link href="dist/output.css" rel="stylesheet" />
+    <!-- Add the Tailwind CSS CDN if you haven't already -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="dark:bg-custom-dark bg-custom-bg dark:text-gray-100 h-screen">
+    <nav class="dark:bg-custom-dark bg-custom-bg p-4">
+        <div class="flex justify-end items-center gap-4">
+            <input type="text" placeholder="Search" class="rounded-xl py-2 px-4 border dark:bg-gray-500 dark:text-gray-100 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500">
+            <a href="#" class="text-xl font-bold text-gray-800 dark:text-gray-100 hidden md:block hover:underline hover:text-gray-600 transition duration-300 ease-in-out transform hover:scale-105">
+                Login
+            </a>
+            <button id="dark-mode-toggle" class="dark:bg-blue-900 dark:text-gray-100 bg-teal-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+                <span id="toggle-label">Dark Mode</span>
+            </button>
+        </div>
+        
+    </nav>
+
+    <section class="mt-8 lg:w-4/5 w-full mx-auto px-2">
+        <div class="w-full flex flex-col justify-center items-center mx-auto">
+            <div class="text-xl text-center w-full lg:w-72 font-semibold text-gray-600 dark:text-gray-100 border border-gray-300 dark:border-gray-600 p-4 mb-4 rounded-lg">
+                <p>3:20 <span>hours left</span></p>
+            </div>
+            <div class="text-2xl text-center lg:w-1/4 w-full font-semibold text-gray-700 dark:text-gray-100 border border-gray-300 dark:border-gray-600 p-4 rounded-lg">
+                Shourov points: 100
+            </div>
+        </div>
+
+        <div class="mt-8 flex flex-col lg:flex-row justify-center items-center gap-8">
+            <!-- Curate Card -->
+            <div class="bg-blue-50 dark:bg-gray-700 lg:p-4 p-2 rounded-lg shadow-md text-center w-full lg:w-2/5">
+                <h2 class="text-2xl font-semibold mb-4">Curate</h2>
+                <form action="curate_endpoint" method="POST">
+                    <div class="mb-4">
+                        <input type="text" name="post_link" placeholder="Enter Post Link" class="w-full dark:bg-gray-600 rounded-xl py-2 px-4 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                    </div>
+                </form>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-300 ease-in-out">Submit</button>
+            </div>
+
+            <!-- Claim Points Card -->
+            <div class="bg-green-50 dark:bg-gray-700 lg:p-4 p-2 rounded-lg shadow-md text-center w-full lg:w-2/5">
+                <h2 class="text-2xl font-semibold mb-4">Claim Points</h2>
+                <form action="claim_points_endpoint" method="POST">
+                    <div class="mb-4">
+                        <input type="text" name="post_link" placeholder="Enter Post Link for approval" class="w-full dark:bg-gray-600 rounded-xl py-2 px-4 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                    </div>
+                </form>
+                <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600 transition duration-300 ease-in-out">Submit</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="AdminDarkLight.js"></script>
+</body>
+
+
+</html>
