@@ -27,7 +27,7 @@
 
 <body>
 
-    <header class="bg-gray-200 dark:bg-gray-600">
+    <header class="bg-navbg dark:bg-custom-dark">
         <div
             class="mx-auto flex flex-col lg:flex-row md:flex-row items-center justify-between py-4 px-8 max-w-7xl pt-4">
             <div class="flex items-center">
@@ -37,16 +37,16 @@
                     <h3 class="text-xl text-gray-900 dark:text-white">Sub heading</h3>
                 </div>
             </div>
-            <div class="hidden lg:block md:block">
+            <div class="hidden lg:flex md:flex items-center justify-center gap-4">
                 <div class="button button-style dark:text-white">Contact</div>
-                <button id="dark-mode-toggle" class="dark:bg-gray-800 dark:text-gray-100 bg-gray-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+                <button id="dark-mode-toggle">
                     <span id="toggle-icon">
-                      <i id="dark-icon" class="fas fa-moon text-2xl"></i>
-                      <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
+                        <i id="dark-icon" class="fas fa-moon text-2xl"></i>
+                        <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
                     </span>
                     <span id="toggle-label"></span>
-                  </button>
-            </div>
+                </button>
+            </div>            
 
           
               
@@ -55,7 +55,7 @@
         </div>
     </header>
 
-    <nav class="p-4 mx-auto bg-gray-100 dark:bg-gray-800 w-full">
+    <nav class="p-4 mx-auto w-full">
         <div class="flex justify-between items-center text-gray-600 dark:text-gray-100 font-medium">
             <!-- Mobile menu button -->
             <button id="menuBtn" class="lg:hidden md:hidden cursor-pointer focus:outline-none absolute top-8 left-6">
@@ -64,7 +64,7 @@
 
             <div id="navLinks" class="lg:flex space-x-10 mx-auto hidden md:block">
                 <!-- Navigation links (desktop) -->
-                <ul class="flex md:space-x-5 lg:space-x-10">
+                <ul class="flex md:space-x-3 lg:space-x-10">
                     <li><a href="index.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Home</a></li>
                     <li class="relative group dropdown">
                         <a href="#" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all dropbtn" id="productBtn">Invest <i
@@ -78,10 +78,10 @@
                         </div>
                     </li>
                     <li><a href="rewards.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Rewards</a></li>
-                    <li><a href="Link.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Link</a></li>
-                    <li><a href="discover.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Discover</a></li>
-                    <li><a href="delegator.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Delegator</a></li>
+                    <li><a href="delegator.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Our Delegators</a></li>
                     <li><a href="richList.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Rich List</a></li>
+                    <li><a href="discover.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Discover Blogs</a></li>
+                    <li><a href="decentralized.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Decentralized Curation</a></li>
                     <li><a href="aboutUs.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">About Us</a></li>
                 </ul>
             </div>
@@ -98,8 +98,8 @@
                 <li><a href="index.html"
                         class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Home</a>
                 </li>
-                <li class="relative group dropdown">
-                    <a href="#" class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-6 rounded-md block"
+                <li class="relative group dropdown hover:text-teal-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">
+                    <a href="#" class=""
                         id="productBtnMobile">Invest <i class="fas fa-caret-down"></i> </a>
                     <!-- Dropdown Content -->
                     <div class="dropdown-content">
@@ -112,8 +112,8 @@
                 <li><a href="rewards.html"
                         class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Rewards</a>
                 </li>
-                <li><a href="Link.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Link</a>
+                <li><a href="decentralized.html"
+                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Decentralized Curation</a>
                 </li>
                 <li><a href="discover.html"
                         class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Discover</a>

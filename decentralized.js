@@ -180,13 +180,13 @@
 
 const currentData = {
     result: [
-        { sl: 1, username: "sourov", post_title: "This is a post 1", nominated_by: "Sakib", point: 1000 },
-        { sl: 2, username: "sourov", post_title: "This is a post 2", nominated_by: "Sakib", point: 1000 },
-        { sl: 3, username: "sourov", post_title: "This is a post 3", nominated_by: "Sakib", point: 1000 },
-        { sl: 4, username: "sourov", post_title: "This is a post 4", nominated_by: "Sakib", point: 1000 },
-        { sl: 5, username: "sourov", post_title: "This is a post 5", nominated_by: "Sakib", point: 1000 },
-        { sl: 6, username: "sourov", post_title: "This is a post 6", nominated_by: "Sakib", point: 1000 },
-        { sl: 7, username: "sourov", post_title: "This is a post 7", nominated_by: "Sakib", point: 1000 }
+        { sl: 1, username: "sourov", post_title: "This is a post link 1", nominated_by: "Sakib", point: 1000 },
+        { sl: 2, username: "sourov", post_title: "This is a post link 2", nominated_by: "Sakib", point: 1000 },
+        { sl: 3, username: "sourov", post_title: "This is a post link 3", nominated_by: "Sakib", point: 1000 },
+        { sl: 4, username: "sourov", post_title: "This is a post link 4", nominated_by: "Sakib", point: 1000 },
+        { sl: 5, username: "sourov", post_title: "This is a post link 5", nominated_by: "Sakib", point: 1000 },
+        { sl: 6, username: "sourov", post_title: "This is a post link 6", nominated_by: "Sakib", point: 1000 },
+        { sl: 7, username: "sourov", post_title: "This is a post link 7", nominated_by: "Sakib", point: 1000 }
         // Add more data as needed
     ],
     is_votable: true
@@ -194,13 +194,13 @@ const currentData = {
 
 const previousData = {
     result: [
-        { sl: 1, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 2, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 3, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 4, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 5, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 6, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 7, username: "tayeb", post_title: "This is a post is previous", nominated_by: "Sakib", point: 1000 }
+        { sl: 1, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 2, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 3, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 4, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 5, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 6, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 7, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 }
         // Add more data as needed
     ],
     is_votable: false
@@ -223,6 +223,7 @@ const totalPagesLabel = document.getElementById("totalPages");
 const prevButton = document.getElementById("prevButton");
 const currentButton = document.getElementById("currentButton");
 
+
 // Function to update the table rows based on data type
 function updateTable(dataType) {
     const dataToDisplay = data[dataType].result;
@@ -239,14 +240,17 @@ function updateTable(dataType) {
 
             row.innerHTML = `
                 <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100 font-bold">${rowData.sl}</td>
-                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100 font-semibold">${rowData.username}</td>
-                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">${rowData.post_title}</td>
-                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">${rowData.nominated_by}</td>
-                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">Category</td>
-                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100 font-semibold">${rowData.point}</td>
+                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100 font-semibold username-cell">
+                    ${window.innerWidth < 768 ? `<a href="/post/${rowData.post_title}">${rowData.username}</a>` : rowData.username}
+                </td>
+                <!-- For mobile view, hide these columns -->
+                <td class="hidden md:table-cell px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">${rowData.post_title}</td>
+                <td class="hidden md:table-cell px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">${rowData.nominated_by}</td>
+                <td class="hidden md:table-cell px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">Category</td>
+                <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100 font-semibold"><span class="cursor-pointer curation-point-cell">${rowData.point}</span></td>
                 ${data[dataType].is_votable ? `
-                    <td class="px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">
-                        <button class="text-white py-2 px-4 hover:scale-110 transition duration-300 ease-in-out active-button"><i class="fa-solid fa-thumbs-up text-2xl" style="color: #61dbc3;"></i></button>
+                    <td class="md:table-cell px-6 py-4 text-left text-base text-gray-900 dark:text-gray-100">
+                    <button class="bg-teal-500 dark:bg-teal-800 dark:hover:bg-teal-900 text-white py-2 px-4 rounded-full hover:bg-teal-600 transition duration-300 ease-in-out">Support</button>
                     </td>
                 ` : ''}
             `;
@@ -305,7 +309,7 @@ nextPageBtn.addEventListener("click", () => {
 });
 
 // Initial setup, set the "Current" button to green
-currentButton.classList.add("bg-green-500", "dark:bg-green-800");
+currentButton.classList.add("bg-teal-400", "dark:bg-teal-800");
 prevButton.classList.add("bg-gray-300", "dark:bg-gray-500");
 
 // Event listener for "Current" button
@@ -316,10 +320,10 @@ currentButton.addEventListener("click", () => {
         updateTable(currentDataType);
 
         // Change the appearance of the buttons using Tailwind CSS classes
-        currentButton.classList.replace("bg-gray-300", "bg-green-500");
-        currentButton.classList.replace("dark:bg-gray-500", "dark:bg-green-800");
-        prevButton.classList.replace("bg-green-500", "bg-gray-300");
-        prevButton.classList.replace("dark:bg-green-800", "dark:bg-gray-500");
+        currentButton.classList.replace("bg-gray-300", "bg-teal-400");
+        currentButton.classList.replace("dark:bg-gray-500", "dark:bg-teal-800");
+        prevButton.classList.replace("bg-teal-400", "bg-gray-300");
+        prevButton.classList.replace("dark:bg-teal-800", "dark:bg-gray-500");
     }
     // Make the support button green for current data
     const supportButtons = document.querySelectorAll("td:nth-child(7) button");
@@ -336,10 +340,10 @@ prevButton.addEventListener("click", () => {
         updateTable(currentDataType);
 
         // Change the appearance of the buttons using Tailwind CSS classes
-        prevButton.classList.replace("bg-gray-300", "bg-green-500");
-        prevButton.classList.replace("dark:bg-gray-500", "dark:bg-green-800");
-        currentButton.classList.replace("bg-green-500", "bg-gray-300");
-        currentButton.classList.replace("dark:bg-green-800", "dark:bg-gray-500");
+        prevButton.classList.replace("bg-gray-300", "bg-teal-400");
+        prevButton.classList.replace("dark:bg-gray-500", "dark:bg-teal-800");
+        currentButton.classList.replace("bg-teal-400", "bg-gray-300");
+        currentButton.classList.replace("dark:bg-teal-800", "dark:bg-gray-500");
     }
     // Make the support button invisible for previous data
     const supportButtons = document.querySelectorAll("td:nth-child(7) button");
@@ -347,3 +351,67 @@ prevButton.addEventListener("click", () => {
         button.classList.remove("active-button");
     });
 });
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Event listener ... ... for Curation Point cell clicks
+    const tableBody = document.querySelector("tbody");
+    const userData = [
+      {
+        username: "sourov",
+        profilePicture: "https://i.ibb.co/HFHwdF0/Illustration.png",
+        points: 1000,
+      },
+      {
+        username: "tayeb",
+        profilePicture: "https://i.ibb.co/HFHwdF0/Illustration.png",
+        points: 1000,
+      },
+      // Add more user data as needed
+    ];
+  
+    // Function to open the user modal
+    function openUserModal(username, profilePicture, points) {
+      const userModal = document.getElementById("userModal");
+      const userName = document.getElementById("userName");
+      const userProfilePicture = document.getElementById("userProfilePicture");
+      const closeUserModal = document.getElementById("closeUserModal");
+      const userPoints = document.getElementById("userPoints")
+  
+      userName.textContent = username;
+      userProfilePicture.src = profilePicture;
+      userProfilePicture.alt = `Profile Picture of ${username}`;
+      userPoints.textContent = `Points: ${points}`;
+  
+      console.log("Opening the modal now.");
+      userModal.classList.remove("hidden");
+  
+      // Event listener for close button click
+      closeUserModal.addEventListener("click", () => {
+        console.log("Closing the modal now.");
+        userModal.classList.add("hidden");
+      });
+    }
+  
+    // Event listener for Curation Point cell clicks
+    tableBody.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target.classList.contains("curation-point-cell")) {
+        const row = target.parentElement.parentElement;
+        const usernameCell = row.querySelector("td:nth-child(2)"); // Assuming the "Username" cell is the second column (index 1)
+        const username = usernameCell.textContent.trim();
+        const rowData = userData.find((user) => user.username === username);
+  
+        if (rowData) {
+          openUserModal(
+            rowData.username,
+            rowData.profilePicture,
+            rowData.points
+          );
+        }
+      }
+    });
+  });

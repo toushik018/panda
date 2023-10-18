@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link</title>
+    <title>Decentralized Curation</title>
+    <link href="button.css" rel="stylesheet" />
     <link href="dist/output.css" rel="stylesheet" />
     <!-- Add the Tailwind CSS CDN if you haven't already -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -14,9 +15,30 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
-</head>
-<body class="dark:bg-custom-dark bg-custom-bg mb-10">
 
+
+
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"
+></script>
+
+<script type="text/javascript">
+  $(function () {
+    $("#navbar").load("navbar.html");
+  });
+</script>
+<script type="text/javascript">
+  $(function () {
+    $("#footer").load("footer.html");
+  });
+</script>
+
+</head>
+<body class="dark:bg-custom-dark bg-custom-bg">
+    <header id="navbar"></header>
+<!-- 
     <nav class="dark:bg-custom-dark bg-custom-bg p-4">
         <div class="flex justify-end items-center gap-4">
             <a href="#" class="text-xl font-bold dark:text-gray-100 hidden md:block transition duration-300 ease-in-out transform hover:scale-105">
@@ -27,10 +49,10 @@
             </button>
             
         </div>
-    </nav>
+    </nav> -->
 
 
-    <section class=" py-16">
+    <section class="py-16">
         <div class="mx-auto flex flex-col items-center justify-center">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:gap-48 gap-4 px-2">
     
@@ -47,9 +69,11 @@
             </div>
             
             <!-- 3: Each Vote Value and Active Hive Power -->
-            <div class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg text-center mt-12 border border-gray-300 dark:border-gray-500">
-                <h2 class="text-2xl font-semibold mb-4">Each Vote Value = 1005 Points</h2>
-                <p class="text-lg text-gray-600 dark:text-gray-100">Active Hive Power + Staked Panda Token</p>
+            <div class="px-2">
+                <div class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg text-center mt-12 border border-gray-300 dark:border-gray-500">
+                    <h2 class="text-2xl font-semibold mb-4">Each Vote Value = 1005 Points</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-100">Active Hive Power + Staked Panda Token</p>
+                </div>
             </div>
 
               <!-- Timer -->
@@ -60,8 +84,8 @@
     </section>
     
     <section>
-        <div class="container mx-auto px-1">
-            <div class="mb-4 flex lg:justify-between justify-around">
+        <div class="lg:w-4/5 w-full mx-auto md:px-4 lg:px-4 px-3">
+            <div class="mb-4 flex justify-between">
                 <button id="currentButton" class="bg-gray-300 dark:bg-gray-800 text-gray-800 dark:text-gray-100 py-2 px-4 rounded-full hover:bg-gray-400 transition duration-300 ease-in-out mb-2 md:mb-0 font-semibold">Current</button>
                 <button id="prevButton" class="bg-gray-300 dark:bg-gray-800 text-gray-800 dark:text-gray-100 py-2 px-4 rounded-full hover:bg-gray-400 transition duration-300 ease-in-out mb-2 md:mb-0 font-semibold">Previous</button>
             </div>
@@ -71,11 +95,13 @@
                         <tr>
                             <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Ranking</th>
                             <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Username</th>
-                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Posts</th>
-                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Nominated By</th>
-                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Category</th>
-                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Current Point</th>
+                            <!-- For mobile view, hide these columns -->
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold md:table-cell hidden">Posts</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold md:table-cell hidden">Nominated By</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold md:table-cell hidden">Category</th>
+                            <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Curation Point</th>
                             <th class="px-2 md:px-6 py-3 text-left text-lg font-semibold">Support</th>
+                            
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-300">
@@ -104,13 +130,54 @@
                 </button>
             </div>
         </div>
+
+
+
+
+<!-- Modal -->
+<div class="fixed z-10 inset-0 overflow-y-auto hidden" id="userModal">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start justify-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-20 w-20 rounded-full bg-gray-200 dark:bg-gray-700 sm:mx-0 sm:h-12 sm:w-12">
+              <!-- User Profile Picture -->
+              <img id="userProfilePicture" class="h-full w-full rounded-full" src="" alt="User Profile Picture">
+            </div>
+            <div class="mt-4 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-xl leading-6 font-semibold text-gray-900 dark:text-gray-200" id="userName">
+                <!-- User Name -->
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500 dark:text-gray-300" id="userPoints">
+                  <!-- User Points -->
+                </p>
+              </div>
+            </div>
+            <button type="button" class="text-gray-400 hover:text-gray-500 absolute top-4 right-4 focus:outline-none" id="closeUserModal">
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
     </section>
     
     
-    
+    <footer id="footer"></footer>
 
-    <script src="link.js"></script>
-    <script src="AdminDarkLight.js"></script>
+    <script src="decentralized.js"></script>
+    <!-- <script src="AdminDarkLight.js"></script> -->
     
 </body>
 </html>
