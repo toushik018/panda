@@ -211,7 +211,7 @@ const data = {
     previous: previousData
 };
 
-const itemsPerPage = 5;
+const itemsPerPage = 20;
 let currentPage = 1;
 let currentDataType = "current"; // Initial data type is "current"
 

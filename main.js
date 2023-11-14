@@ -95,6 +95,8 @@ const updateChart = (labels, data) => {
       ],
     },
     options: {
+      responsive: false,
+      maintainAspectRatio: false,
       borderWidth: 10,
       borderRadius: 2,
       hoverBorderWidth: 0,

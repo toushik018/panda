@@ -14,7 +14,7 @@
         #mobileMenu {
           opacity: 0;
           transform: translateY(-10px);
-          transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+          transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         }
     
         .menu-open #mobileMenu {
@@ -41,8 +41,8 @@
                 <div class="button button-style dark:text-white">Contact</div>
                 <button id="dark-mode-toggle">
                     <span id="toggle-icon">
-                        <i id="dark-icon" class="fas fa-moon text-2xl"></i>
-                        <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
+                        <i id="dark-icon" class="fas fa-moon text-3xl"></i>
+                        <i id="light-icon" class="fas fa-sun hidden text-2xl text-yellow-500"></i>
                     </span>
                     <span id="toggle-label"></span>
                 </button>
@@ -55,7 +55,7 @@
         </div>
     </header>
 
-    <nav class="p-4 mx-auto w-full">
+    <nav class="py-4 mx-auto w-full">
         <div class="flex justify-between items-center text-gray-600 dark:text-gray-100 font-medium">
             <!-- Mobile menu button -->
             <button id="menuBtn" class="lg:hidden md:hidden cursor-pointer focus:outline-none absolute top-8 left-6">
@@ -67,10 +67,10 @@
                 <ul class="flex md:space-x-3 lg:space-x-10">
                     <li><a href="index.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Home</a></li>
                     <li class="relative group dropdown">
-                        <a href="#" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all dropbtn" id="productBtn">Invest <i
+                        <a href="#" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all dropbtn whitespace-nowrap" id="productBtn">Invest <i
                                 class="fas fa-caret-down"></i></a>
                         <!-- Dropdown Content -->
-                        <div class="dropdown-content">
+                        <div class="dropdown-content text-gray-800 bg-teal-50 dark:bg-gray-900 dark:text-gray-100 w-40">
                             <a href="#">Buy Panda</a>
                             <a href="#">Buy PandaX</a>
                             <a href="#">Delegate</a>
@@ -78,63 +78,65 @@
                         </div>
                     </li>
                     <li><a href="rewards.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Rewards</a></li>
-                    <li><a href="delegator.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Our Delegators</a></li>
-                    <li><a href="richList.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Rich List</a></li>
-                    <li><a href="discover.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Discover Blogs</a></li>
-                    <li><a href="decentralized.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">Decentralized Curation</a></li>
-                    <li><a href="aboutUs.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all">About Us</a></li>
+                    <li><a href="delegator.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all whitespace-nowrap">Our Delegators</a></li>
+                    <li><a href="richList.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all whitespace-nowrap">Rich List</a></li>
+                    <li><a href="discover.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all whitespace-nowrap">Discover Blogs</a></li>
+                    <li><a href="decentralized.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all whitespace-nowrap">Decentralized Curation</a></li>
+                    <li><a href="aboutUs.html" class="hover:text-gray-900 hover:bg-gray-300 p-2 rounded-lg duration-300 transition-all whitespace-nowrap">About Us</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div id="mobileMenu"
-        class="lg:hidden hidden bg-gray-200 dark:bg-gray-800 absolute inset-0 transition-opacity ease-in-out duration-500 transform translate-y-[-10px] z-50">
+        class="lg:hidden hidden bg-custom-bg dark:bg-custom-dark absolute inset-0 transition-opacity ease-in-out duration-500 transform translate-y-[-10px] z-50">
         <div class="flex flex-col items-center justify-center mt-20">
             <button id="closeBtn" class="lg:hidden cursor-pointer focus:outline-none absolute top-8 left-8">
                 <i class="fas fa-times text-3xl text-black dark:text-white"></i>
             </button>
             <ul class="space-y-4 text-center">
-                <li><a href="index.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Home</a>
+                <li><a href="index.html" class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg text-gray-950 dark:text-gray-100 text-xl font-semibold">Home</a>
                 </li>
-                <li class="relative group dropdown hover:text-teal-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">
-                    <a href="#" class=""
-                        id="productBtnMobile">Invest <i class="fas fa-caret-down"></i> </a>
+
+                <li class="relative group dropdown text-left py-2 px-4 rounded-md block bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg z-20">
+                    <a href="#" class="text-gray-950 dark:text-gray-100 text-xl font-semibold" id="productBtnMobile">Invest <i class="fas fa-caret-down"></i> </a>
                     <!-- Dropdown Content -->
-                    <div class="dropdown-content">
+                    <div class="dropdown-content text-gray-800 dark:bg-gray-800 dark:text-gray-100 w-48 text-lg font-semibold">
                         <a href="#">Buy Panda</a>
                         <a href="#">Buy PandaX</a>
                         <a href="#">Delegate</a>
-
                     </div>
                 </li>
-                <li><a href="rewards.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Rewards</a>
+                
+
+                <li class="relative group hover:text-teal-400">
+                    <a href="rewards.html" class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg">
+                        <span class="relative z-10 text-gray-950 dark:text-gray-100 text-xl font-semibold">Rewards</span>
+                    </a>
                 </li>
-                <li><a href="decentralized.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Decentralized Curation</a>
+                
+                
+
+                <li><a href="delegator.html" class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg text-gray-950 dark:text-gray-100 text-xl font-semibold">Our Delegators</a>
                 </li>
-                <li><a href="discover.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Discover</a>
+
+                <li><a href="richList.html" class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg text-gray-950 dark:text-gray-100 text-xl font-semibold">Rich List</a></li>
+
+                <li><a href="discover.html" class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg text-gray-950 dark:text-gray-100 text-xl font-semibold">Discover Blogs</a></li>
+
+                <li><a href="decentralized.html" class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg text-gray-950 dark:text-gray-100 text-xl font-semibold">Decentralized Curation</a>
                 </li>
-                <li><a href="delegator.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Delegator</a>
-                </li>
-                <li><a href="richList.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">Rich
-                        List</a></li>
+
                 <li><a href="aboutUs.html"
-                        class="hover:text-blue-400 text-white text-xl bg-gray-800 dark:bg-gray-600 py-2 px-4 rounded-md block">About
-                        Us</a></li>
+                        class="text-left py-2 px-4 rounded-md block relative bg-menu-bg dark:bg-menu-dark bg-opacity-75 backdrop-filter backdrop-glass shadow-lg text-gray-950 dark:text-gray-100 text-xl font-semibold">About Us</a></li>
             </ul>
 
 
             <div class="lg:hidden button button-style text-xl mt-8">Contact</div>
-            <button id="dark-mode-toggle-mobile" class="dark:bg-gray-800 dark:text-gray-100 bg-gray-200 text-gray-900 py-2 px-4 rounded-full focus:outline-none">
+            <button id="dark-mode-toggle-mobile" class="dark:bg-gray-900 dark:text-gray-100 py-2 px-4 rounded-full focus:outline-none mt-4">
                 <span id="toggle-icon">
-                    <i id="dark-icon" class="fas fa-moon text-2xl"></i>
-                    <i id="light-icon" class="fas fa-sun hidden text-xl text-yellow-500"></i>
+                    <i id="dark-icon" class="fas fa-moon text-4xl"></i>
+                    <i id="light-icon" class="fas fa-sun hidden text-4xl text-yellow-500"></i>
                 </span>
                 <span id="toggle-label"></span>
             </button>
@@ -164,7 +166,34 @@
 
 
 
-      
+    
+
+    mobileMenu.addEventListener("touchstart", function (e) {
+        startY = e.touches[0].clientY;
+    });
+
+    mobileMenu.addEventListener("touchmove", function (e) {
+        const currentY = e.touches[0].clientY;
+        const distance = startY - currentY;
+
+        if (distance > 50) {
+            closeMobileMenu();
+        }
+
+        e.preventDefault(); // Prevent page scrolling
+    });
+
+    closeBtn.addEventListener("click", closeMobileMenu);
+
+    function closeMobileMenu() {
+        document.body.classList.remove("menu-open");
+        mobileMenu.classList.add("closing");
+
+        setTimeout(function () {
+            mobileMenu.classList.add("hidden");
+            mobileMenu.classList.remove("closing");
+        }, 300);
+    }
 
       </script>
       <script src="dark-mode.js"></script>
