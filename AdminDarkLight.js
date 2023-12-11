@@ -35,7 +35,6 @@
 
 
 // Function to toggle dark mode
-// Function to toggle dark mode
 document.addEventListener("DOMContentLoaded", function () {
     function toggleDarkMode() {
         var html = document.documentElement;
