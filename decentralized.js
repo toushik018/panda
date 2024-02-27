@@ -187,7 +187,7 @@ const currentData = {
         { sl: 5, username: "sourov", post_title: "This is a post link 5", nominated_by: "Sakib", point: 1000 },
         { sl: 6, username: "sourov", post_title: "This is a post link 6", nominated_by: "Sakib", point: 1000 },
         { sl: 7, username: "sourov", post_title: "This is a post link 7", nominated_by: "Sakib", point: 1000 }
-        // Add more data as needed
+
     ],
     is_votable: true
 };
@@ -200,8 +200,12 @@ const previousData = {
         { sl: 4, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
         { sl: 5, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
         { sl: 6, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
-        { sl: 7, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 }
-        // Add more data as needed
+        { sl: 7, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 8, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 9, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 10, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+
     ],
     is_votable: false
 };
@@ -211,9 +215,9 @@ const data = {
     previous: previousData
 };
 
-const itemsPerPage = 20;
+const itemsPerPage = 4;
 let currentPage = 1;
-let currentDataType = "current"; // Initial data type is "current"
+let currentDataType = "current";
 
 const tableBody = document.querySelector("tbody");
 const prevPageBtn = document.getElementById("prevPage");
@@ -222,17 +226,27 @@ const currentPageLabel = document.getElementById("currentPage");
 const totalPagesLabel = document.getElementById("totalPages");
 const prevButton = document.getElementById("prevButton");
 const currentButton = document.getElementById("currentButton");
+const paginationSection = document.getElementById("pagination-section");
 
 
 // Function to update the table rows based on data type
 function updateTable(dataType) {
     const dataToDisplay = data[dataType].result;
+    // const startIndex = (currentPage - 1) * itemsPerPage;
+    // const endIndex = Math.min(startIndex + itemsPerPage, dataToDisplay.length);
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = Math.min(startIndex + itemsPerPage, dataToDisplay.length);
+    let endIndex;
 
-    tableBody.innerHTML = ''; // Clear the table
+    if (dataType === "current") {
+        endIndex = Math.min(startIndex + itemsPerPage, dataToDisplay.length);
+    } else {
+        endIndex = dataToDisplay.length; 
+    }
+
+    tableBody.innerHTML = '';
 
     if (dataToDisplay.length > 0) {
+        let previousCount = 1;
         for (let i = startIndex; i < endIndex; i++) {
             const rowData = dataToDisplay[i];
 
@@ -256,6 +270,14 @@ function updateTable(dataType) {
             `;
 
             tableBody.appendChild(row);
+            if (dataType === "previous" && (i + 1) % 10 === 0 && i < endIndex - 1) {
+                const line = document.createElement("tr");
+                line.innerHTML = `
+                    <th colspan="7" class="text-lg text-gray-800 font-semibold border-t border-gray-200 py-2 bg-gray-200">Previous ${previousCount}</th>
+                `;
+                tableBody.appendChild(line);
+                previousCount++;
+            }
         }
     } else {
         const message = dataType === "current" ? "No current data" : "No previous data";
@@ -270,8 +292,13 @@ function updateTable(dataType) {
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === Math.ceil(dataToDisplay.length / itemsPerPage);
 
+
+
+
+
     // Hide the support button and header column when viewing previous data
     if (dataType === "previous") {
+        paginationSection.style.display = "none";
         const supportButtons = document.querySelectorAll("td:nth-child(7) button");
         supportButtons.forEach((button) => {
             button.style.display = "none";
@@ -279,6 +306,7 @@ function updateTable(dataType) {
         const supportHeader = document.querySelector("th:nth-child(7)");
         supportHeader.style.display = "none";
     } else {
+        paginationSection.style.display = "flex";
         const supportButtons = document.querySelectorAll("td:nth-child(7) button");
         supportButtons.forEach((button) => {
             button.style.display = "block";
@@ -355,63 +383,3 @@ prevButton.addEventListener("click", () => {
 
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Event listener ... ... for Curation Point cell clicks
-    const tableBody = document.querySelector("tbody");
-    const userData = [
-      {
-        username: "sourov",
-        profilePicture: "https://i.ibb.co/HFHwdF0/Illustration.png",
-        points: 1000,
-      },
-      {
-        username: "tayeb",
-        profilePicture: "https://i.ibb.co/HFHwdF0/Illustration.png",
-        points: 1000,
-      },
-      // Add more user data as needed
-    ];
-  
-    // Function to open the user modal
-    function openUserModal(username, profilePicture, points) {
-      const userModal = document.getElementById("userModal");
-      const userName = document.getElementById("userName");
-      const userProfilePicture = document.getElementById("userProfilePicture");
-      const closeUserModal = document.getElementById("closeUserModal");
-      const userPoints = document.getElementById("userPoints")
-  
-      userName.textContent = username;
-      userProfilePicture.src = profilePicture;
-      userProfilePicture.alt = `Profile Picture of ${username}`;
-      userPoints.textContent = `Points: ${points}`;
-  
-      console.log("Opening the modal now.");
-      userModal.classList.remove("hidden");
-  
-      // Event listener for close button click
-      closeUserModal.addEventListener("click", () => {
-        console.log("Closing the modal now.");
-        userModal.classList.add("hidden");
-      });
-    }
-  
-    // Event listener for Curation Point cell clicks
-    tableBody.addEventListener("click", (e) => {
-      const target = e.target;
-      if (target.classList.contains("curation-point-cell")) {
-        const row = target.parentElement.parentElement;
-        const usernameCell = row.querySelector("td:nth-child(2)"); // Assuming the "Username" cell is the second column (index 1)
-        const username = usernameCell.textContent.trim();
-        const rowData = userData.find((user) => user.username === username);
-  
-        if (rowData) {
-          openUserModal(
-            rowData.username,
-            rowData.profilePicture,
-            rowData.points
-          );
-        }
-      }
-    });
-  });
