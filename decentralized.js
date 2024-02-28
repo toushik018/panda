@@ -205,6 +205,17 @@ const previousData = {
         { sl: 9, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
         { sl: 10, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
         { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
+        { sl: 11, username: "tayeb", post_title: "This is a post link is previous", nominated_by: "Sakib", point: 1000 },
 
     ],
     is_votable: false
@@ -240,13 +251,25 @@ function updateTable(dataType) {
     if (dataType === "current") {
         endIndex = Math.min(startIndex + itemsPerPage, dataToDisplay.length);
     } else {
-        endIndex = dataToDisplay.length; 
+        endIndex = dataToDisplay.length;
     }
 
     tableBody.innerHTML = '';
 
     if (dataToDisplay.length > 0) {
         let previousCount = 1;
+
+        // updated here, this "Previous" will show first line of the table.
+        if (dataType === "previous") {
+            const line = document.createElement("tr");
+            line.innerHTML = `
+                <th colspan="7" class="text-lg text-gray-800 font-semibold border-t border-gray-200 py-2 bg-gray-200"> Previous ${previousCount}</th>
+            `;
+            tableBody.appendChild(line);
+            previousCount++;
+        }
+
+
         for (let i = startIndex; i < endIndex; i++) {
             const rowData = dataToDisplay[i];
 
@@ -273,7 +296,7 @@ function updateTable(dataType) {
             if (dataType === "previous" && (i + 1) % 10 === 0 && i < endIndex - 1) {
                 const line = document.createElement("tr");
                 line.innerHTML = `
-                    <th colspan="7" class="text-lg text-gray-800 font-semibold border-t border-gray-200 py-2 bg-gray-200">Previous ${previousCount}</th>
+                    <th colspan="7" class="text-lg text-gray-800 font-semibold border-t border-gray-200 py-2 bg-gray-200"> Previous ${previousCount}</th>
                 `;
                 tableBody.appendChild(line);
                 previousCount++;
