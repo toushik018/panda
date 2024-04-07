@@ -8,16 +8,11 @@
     color: #023047;
     transition: all 400ms ease;
 } */
-
+/* 
 .card:hover {
     transform: scale(1.01);
     box-shadow: 0 4px 8px -7px rgba(0, 0, 0, 0.3);
 }
-
-/* .chart-container {
-    width: 400px;
-    height: 400px;
-} */
 
 .holdings-stats {
     font-family: "Rubik", sans-serif;
@@ -42,4 +37,22 @@
 .holdings-stats .details .percentage {
     font-weight: 700;
     color: #e63946;
+} */
+
+.card {
+    border-radius: 18px;
+    /* background: ; */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* border-color: rgb(218, 214, 214);
+    border-width: 2px; */
+    position: relative;
+    max-width: 320px;
+    transition: all 0.3s ease;
+    margin: 28px auto;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    /* box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2); */
+   
 }
