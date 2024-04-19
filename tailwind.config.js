@@ -21,6 +21,8 @@ module.exports = {
         'menu-dark': 'linear-gradient(to right, #3a356f 0%, #000000 100%)',
         'card-bg': 'linear-gradient(315deg, #c1f4e6 0%, #f7f1ea 74%)',
         'card-bg-dark': 'linear-gradient(to right, #3a356f 0%, #292645 50%, #1c1a35 100%)',
+        'distribution-bg-dark': 'linear-gradient(to right, #1a1740 0%, #100f29 50%, #080715 100%)',
+        'distribution-bg': 'linear-gradient(315deg, #c1f4e6 0%, #f7f1ea 74%)',
 
       },
     },

@@ -1,319 +1,314 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Distribution</title>
     <!-- Include Tailwind CSS -->
     <link href="/dist/output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
 
-
-
-</head>
-<body class="dark:bg-custom-dark bg-custom-bg dark:text-gray-100 h-screen">
-
-  <nav class="dark:bg-custom-dark bg-custom-bg p-4">
-    <div class="flex justify-end items-center mr-8">
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="dark:bg-custom-dark bg-custom-bg dark:text-gray-100">
+    <nav class="dark:bg-custom-dark bg-custom-bg p-4">
+      <div class="flex justify-end items-center mr-8">
         <button id="dark-mode-toggle">
-            <span id="toggle-icon">
-                <i id="dark-icon" class="fas fa-moon text-2xl"></i>
-                <i id="light-icon" class="fas fa-sun text-xl text-yellow-500" style="display: none;"></i>
-            </span>
-        </button> 
-    </div>
-</nav>
-
-  <div class="px-4 lg:px-0">
-    <div class="bg-red-400 text-white dark:bg-red-100 dark:text-red-700 py-2 px-4 mb-4 rounded-md w-full lg:w-1/5 text-center mx-auto mt-8">
-        <p>Warning message goes here</p>
-    </div>
-  </div>
-
-    <h2 class="text-2xl font-semibold mb-4 text-center dark:text-gray-100">Management</h2>
-
-<div class="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 w-full lg:w-4/5 mx-auto mt-4 gap-4 md:p-4 p-2">
-<!-- First -->
-<div>
-    <h1 class="text-lg text-center font-bold mb-4">Title 1</h1>
-    <div class="border-2 dark:border-gray-600 p-4">
-        <div class="w-full flex items-center justify-center gap-2 mb-4"> 
-            <label for="inputToken1" class="block text-gray-700 font-semibold mb-2">
-                <p id="TokenSetting1" class="dark:text-gray-100"></p>
-            </label>
-            <input type="number" id="inputToken1" name="inputToken1" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
-            <button type="button" class="text-xl text-gray-400 py-2 rounded-md hover:text-gray-700 transition duration-300 ease-in-out" onclick="openModal(1)">
-                <i class="fas fa-cog"></i> 
-            </button>
-        </div>
-        
-        <div class="w-full flex items-center justify-center gap-2"> 
-            <label for="inputToken2" class="block text-gray-700 font-semibold mb-2">
-                <p id="TokenSetting2" class="dark:text-gray-100"></p>
-            </label>
-            <input type="number" id="inputToken2" name="inputToken2" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
-            <button type="button" class="text-xl text-gray-400 py-2 rounded-md hover:text-gray-700 transition duration-300 ease-in-out" onclick="openModal(2)">
-                <i class="fas fa-cog"></i> 
-            </button>
-        </div>
-        <div class="flex justify-center"> 
-            <button class="save-button bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out mt-6" onclick="TokenOpenModal()">Save</button>
-        </div>
-    </div>
-</div>
-
-<div id="inputTokenConfirmModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-    <div class="modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/4 mx-auto rounded shadow-lg z-50 transform -translate-y-1/2 transition-transform duration-300">
-        <div class="p-4">
-            <p class="text-gray-700 dark:text-gray-100 text-lg font-semibold">Are you sure you want to save?</p>
-        </div>
-        <div class="bg-gray-100 dark:bg-gray-500 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onclick="confirmSaveTokens(true)">Yes</button>
-            <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-gray-400 dark:text-gray-100 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onclick="confirmSaveTokens(false)">No</button>
-        </div>
-    </div>
-</div>
-
-    
-    
-
-<!-- Modal -->
-<div id="myModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-  <div class="modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/5 mx-auto rounded shadow-lg z-50">
-      <div class="modal-header p-4 flex justify-end">
-          <button class="text-gray-600 dark:text-gray-100 hover:text-gray-900 text-xl" onclick="closeModal()">
-              <i class="fas fa-times"></i>
-          </button>
+          <span id="toggle-icon">
+            <i id="dark-icon" class="fas fa-moon text-2xl"></i>
+            <i
+              id="light-icon"
+              class="fas fa-sun text-xl text-yellow-500"
+              style="display: none"
+            ></i>
+          </span>
+        </button>
       </div>
+    </nav>
 
-      <!-- Modal content goes here -->
-      <form id="tokenForm"> 
-          <div class="p-4 mb-2">
-              <div class="text-center p-1">
-                  <label class="block text-gray-700 dark:text-gray-100 font-semibold" id="modalTokenNameLabel">Token Name:</label>
-                  <div id="modalTokenName" name="modalTokenName" class="dark:text-gray-100"></div>
-              </div>
+    <div class="px-4 lg:px-0">
+      <div
+        class="error-container text-white py-2 px-4 mb-4 rounded-md w-full lg:w-1/5 text-center mx-auto mt-8"
+      >
+        <p></p>
+      </div>
+    </div>
 
-              <!-- Container for dynamic input fields -->
-              <div id="modalInputsContainer" class="dark:text-gray-100">
-                  <!-- Input field for 'div' value -->
-                  <div class="text-center p-1">
-                      <label class="block text-gray-700 dark:text-gray-100 font-semibold">Div Value:</label>
-                      <input type="text" id="modalTokenDiv" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100">
-                  </div>
-
-                  <!-- Input field for 'opt' value -->
-                  <div class="text-center p-1">
-                      <label class="block text-gray-700 dark:text-gray-100 font-semibold">Opt Value:</label>
-                      <input type="text" id="modalTokenOpt" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100">
-                  </div>
-              </div>
+    <section
+      class="grid grid-cols-1 lg:grid-cols-2 gap-4 px-2 mx-auto w-full lg:w-4/5 mt-10"
+    >
+      <div class="flex flex-col space-y-4">
+        <!-- Panda Eds -->
+        <div
+          class="border border-gray-300 dark:border-gray-500 p-4 rounded space-y-4 bg-distribution-bg dark:bg-distribution-bg-dark"
+        >
+          <p class="text-base font-semibold">panda-eds</p>
+          <div class="flex justify-around items-center gap-2">
+            <label for="div1">div:</label>
+            <input
+              type="number"
+              name="div"
+              id="div1"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+            />
+            <label for="opt1">opt:</label>
+            <input
+              type="number"
+              name="opt"
+              id="opt1"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+            />
           </div>
-
-          <div class="flex justify-center p-4">
-              <button type="button" class="bg-gray-500 dark:bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out" onclick="saveToken()">Save</button>
-          </div>
-      </form>
-  </div>
-</div>
-
-
-<!-- ---------------- -->
-
-          
-
-        <div>
-            <h1 class="text-lg text-center font-bold mb-4">Title 2</h1>
-            <div class="border-2 dark:border-gray-600 p-4">
-                <div class="space-y-4 entryContainer">
-                  <div class="text-center">
-                      <button class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out mt-2" onclick="openAddEntryModal()">Add</button>
-                  </div>
-                  <form id="entryForm">
-                  <div class="w-full mx-auto">
-                      <div class="flex items-center gap-2">
-                          <label for="input" class="block text-gray-700 font-semibold mb-2">
-                            <p></p>
-                          </label>
-                          <input type="number" id="input" name="input" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
-                          <div class="text-gray-500 py-2 px-2 flex gap-3">
-                            <i class="fas fa-percent"></i>
-                            
-                        </div>
-                        
-                      </div>
-                  </div>
-                </form>
-              </div>
-              <div class="flex justify-center mt-4">
-                <button class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out" onclick="saveEntries()">Save</button>
-            </div>
-              </div>
+          <button
+            class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+            onclick="savePandaEds()"
+          >
+            Save
+          </button>
         </div>
 
-
-<!-- Confirmation Modal -->
-<div id="confirmationModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-  <div class="modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/4 mx-auto rounded shadow-lg z-50 transform -translate-y-1/2 transition-transform duration-300">
-      <div class="p-4">
-          <p class="text-gray-700 dark:text-gray-100 text-lg font-semibold">Are you sure you want to save?</p>
-      </div>
-      <div class="bg-gray-100 dark:bg-gray-500 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-        <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onclick="confirmSave(true)">Yes</button>
-        <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-gray-400 dark:text-gray-100 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onclick="confirmSave(false)">No</button>
-      </div>
-  </div>
-</div>
-
-
-
-
-<!-- 2 -->
-         <div>
-            <h1 class="text-lg text-center font-bold mb-4">Title 3</h1>
-            <div class=" border-2 dark:border-gray-600 p-4">
-                <div class="space-y-4 entryContainer2">
-                  <div class="text-center">
-                      <button class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out mt-2" onclick="openAddEntryModal2()">Add</button>
-                  </div>
-                  <form id="entryForm2">
-                  <div class="w-full mx-auto">
-                      <div class="flex items-center gap-2">
-                          <label for="input" class="block text-gray-700 font-semibold mb-2">
-                            <p></p>
-                          </label>
-                          <input type="number" id="input" name="input" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
-                          <div class="text-gray-500 py-2 px-2">
-                              <i class="fas fa-percent"></i>
-                          </div>
-                      </div>
-                  </div>
-                </form>
-                  
-              </div>
-      
-              <div class="flex justify-center mt-4">
-                <button class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out" onclick="saveEntries2()">Save</button>
-            </div>
-              </div>
-         </div>
-        
-
-          <!-- Confirmation Modal 2-->
-<div id="confirmationModal2" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-  <div class="modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/4 mx-auto rounded shadow-lg z-50 transform -translate-y-1/2 transition-transform duration-300">
-      <div class="p-4">
-          <p class="text-gray-700 dark:text-gray-100 text-lg font-semibold">Are you sure you want to save?</p>
-      </div>
-      <div class="bg-gray-100 dark:bg-gray-500 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-        <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onclick="confirmSave2(true)">Yes</button>
-        <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-gray-400 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onclick="confirmSave2(false)">No</button>
-      </div>
-  </div>
-</div>
-
-          
-
-  <!-- Add Entry Modal -->
-<div id="addEntryModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-  <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-
-  <div class="modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/5 mx-auto rounded shadow-lg z-50">
-      <div class="modal-header p-4 flex justify-end dark:text-gray-100">
-          <button class="text-gray-700 dark:text-gray-100 hover:text-gray-900" onclick="closeAddEntryModal()">
-              <i class="fas fa-times"></i>
+        <!-- Panda Bro -->
+        <div
+          class="border border-gray-300 dark:border-gray-500 p-4 rounded space-y-4 bg-distribution-bg dark:bg-distribution-bg-dark"
+        >
+          <p class="text-base font-semibold">panda-bro</p>
+          <div class="flex justify-around items-center gap-2">
+            <label for="div2">div:</label>
+            <input
+              type="number"
+              name="div2"
+              id="div2"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+            />
+            <label for="opt2">opt:</label>
+            <input
+              type="number"
+              name="opt2"
+              id="opt2"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+            />
+          </div>
+          <button
+            class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+            onclick="savePandaBro()"
+          >
+            Save
           </button>
+        </div>
+
+        <!-- Panda Workerbee -->
+        <div
+          class="border border-gray-300 dark:border-gray-500 p-4 rounded space-y-4 bg-distribution-bg dark:bg-distribution-bg-dark"
+        >
+          <p class="text-base font-semibold">panda-workerbee</p>
+          <div class="flex items-center gap-2">
+            <label for="opt3">opt:</label>
+            <input
+              type="number"
+              name="opt3"
+              id="opt3"
+              class="px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+            />
+          </div>
+          <button
+            class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+            onclick="pandaWorkerBee()"
+          >
+            Save
+          </button>
+        </div>
       </div>
 
-      <div class="p-4 flex flex-col items-center">
+      <div class="w-full lg:w-4/5">
+        <!-- Management: Hive -->
+        <div
+          class="border border-gray-300 dark:border-gray-500 p-4 rounded bg-distribution-bg dark:bg-distribution-bg-dark"
+        >
+          <h1 class="text-lg text-center font-semibold mb-4">
+            Management: Hive
+          </h1>
+          <div class="space-y-4">
+            <div class="text-center">
+              <button
+                class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out mt-2"
+                onclick="openAddHiveModal()"
+              >
+                Add
+              </button>
+            </div>
+            <div id="hiveEntries"></div>
+          </div>
+          <div>
+            <div class="flex justify-center mt-4">
+              <button
+                class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+                onclick="saveHive()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Management: Panda token -->
+        <div
+          class="border border-gray-300 dark:border-gray-600 p-4 w-full mt-10 rounded bg-distribution-bg dark:bg-distribution-bg-dark"
+        >
+          <h1 class="text-lg text-center font-semibold mb-4">
+            Management: Panda token
+          </h1>
+          <div class="space-y-4">
+            <div class="text-center">
+              <button
+                class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out mt-2"
+                onclick="openAddPandaTokenModal()"
+              >
+                Add
+              </button>
+            </div>
+            <div id="tokenEntries"></div>
+          </div>
+          <div class="flex justify-center mt-4">
+            <button
+              class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+              onclick="savePandaToken()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modals -->
+
+    <!-- Add Hive Modal -->
+    <div
+      id="addHiveModal"
+      class="modal fixed inset-0 flex items-center justify-center z-50 w-full hidden"
+    >
+      <!-- Modal Overlay -->
+      <div
+        class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+      ></div>
+
+      <!-- Modal Content -->
+      <div
+        class="hive-modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/5 mx-auto rounded shadow-lg z-50"
+      >
+        <div class="modal-header p-4 flex justify-end">
+          <button
+            class="text-gray-700 dark:text-gray-100 hover:text-gray-900"
+            onclick="closeAddHiveModal()"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="p-4 flex flex-col items-center">
           <div class="w-full mb-4">
-              <label class="block text-gray-700 dark:text-gray-100 font-semibold mb-2">Name:</label>
-              <input type="text" id="newEntryName" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
+            <label
+              class="block text-gray-700 dark:text-gray-100 font-semibold mb-2"
+              >Name:</label
+            >
+            <input
+              type="text"
+              id="newEntryName2"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+              required
+            />
           </div>
           <div class="w-full">
-              <label class="block text-gray-700 dark:text-gray-100 font-semibold mb-2">Value:</label>
-              <input type="number" id="newEntryValue" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
+            <label
+              class="block text-gray-700 dark:text-gray-100 font-semibold mb-2"
+              >Value:</label
+            >
+            <input
+              type="number"
+              id="newEntryValue2"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+              required
+            />
           </div>
-      </div>
-      <div class="flex justify-center p-4">
-          <button class="bg-gray-500 dark:bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out" onclick="addNewEntry()">Ok</button>
-      </div>
-  </div>
-</div>
-
-
-
-  <!-- Add Entry Modal 2-->
-  <div id="addEntryModal2" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-  
-    <div class="modal-container2 bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/5 mx-auto rounded shadow-lg z-50">
-        <div class="modal-header p-4 flex justify-end">
-            <button class="text-gray-700 dark:text-gray-100 hover:text-gray-900" onclick="closeAddEntryModal2()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-  
-        <div class="p-4 flex flex-col items-center">
-            <div class="w-full mb-4">
-                <label class="block text-gray-700 dark:text-gray-100 font-semibold mb-2">Name:</label>
-                <input type="text" id="newEntryName2" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
-            </div>
-            <div class="w-full">
-                <label class="block text-gray-700 dark:text-gray-100 font-semibold mb-2">Value:</label>
-                <input type="number" id="newEntryValue2" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" required>
-            </div>
         </div>
         <div class="flex justify-center p-4">
-            <button class="bg-gray-500 dark:bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out" onclick="addNewEntry2()">Ok</button>
+          <button
+            class="bg-gray-500 dark:bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+            onclick="addHive()"
+          >
+            Ok
+          </button>
         </div>
-    </div>
-  </div>
-        
-<!-- ------------------- -->
-
-<div>
-    <h1 class="text-lg text-center font-bold mb-4">Title 4</h1>
-    <div class="border-2 dark:border-gray-600 flex flex-col justify-between items-center p-4">
-        <!-- Status -->
-        <p class="text-gray-700 mb-4 dark:text-gray-100">Last Updated 2 hours ago</p>
-
-        <div class="mt-auto"> <!-- "mt-auto" pushes the button to the bottom -->
-            <button type="button" class="bg-gray-500 dark:bg-gray-600 text-white py-2 px-6 rounded-md hover:bg-gray-700 transition duration-300 ease-in-out" onclick="openDistributeModal()">Distribute</button>
-        </div>
-    </div>
-</div>
-
-<div id="distributeModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50 w-full">
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
-    <div class="modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/4 mx-auto rounded shadow-lg z-50 transform -translate-y-1/2 transition-transform duration-300">
-        <div class="p-4">
-            <p class="text-gray-700 dark:text-gray-100 text-lg font-semibold">Are you sure you want to distribute?</p>
-        </div>
-        <div class="bg-gray-100 dark:bg-gray-500 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-            <button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onclick="confirmDistribute(true)">Yes</button>
-            <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-gray-400 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" onclick="closeDistributeModal()">No</button>
-        </div>
-    </div>
-</div>
-
-
-
+      </div>
     </div>
 
+    <!-- Add Panda Token Modal -->
+    <div
+      id="addPandaTokenModal"
+      class="modal fixed inset-0 flex items-center justify-center z-50 w-full hidden"
+    >
+      <!-- Modal Overlay -->
+      <div
+        class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+      ></div>
 
+      <!-- Modal Content -->
+      <div
+        class="hive-modal-container bg-white dark:bg-gray-600 w-11/12 sm:w-2/3 md:w-1/2 lg:w-1/5 mx-auto rounded shadow-lg z-50"
+      >
+        <div class="modal-header p-4 flex justify-end">
+          <button
+            class="text-gray-700 dark:text-gray-100 hover:text-gray-900"
+            onclick="closeAddPandaTokenModal()"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
 
+        <div class="p-4 flex flex-col items-center">
+          <div class="w-full mb-4">
+            <label
+              class="block text-gray-700 dark:text-gray-100 font-semibold mb-2"
+              >Name:</label
+            >
+            <input
+              type="text"
+              id="newEntryName1"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+              required
+            />
+          </div>
+          <div class="w-full">
+            <label
+              class="block text-gray-700 dark:text-gray-100 font-semibold mb-2"
+              >Value:</label
+            >
+            <input
+              type="number"
+              id="newEntryValue1"
+              class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100"
+              required
+            />
+          </div>
+        </div>
+        <div class="flex justify-center p-4">
+          <button
+            class="bg-gray-500 dark:bg-gray-500 text-white py-2 px-6 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
+            onclick="addPandaToken()"
+          >
+            Ok
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script src="distribution.js"></script>
     <script src="AdminDarkLight.js"></script>
-
-</body>
+  </body>
 </html>

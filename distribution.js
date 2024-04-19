@@ -1,553 +1,336 @@
-
-
-
-// // Function to open the confirmation modal
-// function TokenOpenModal() {
-//     const modal = document.getElementById("inputTokenConfirmModal");
-//     modal.classList.remove("hidden");
-// }
-
-// // Function to confirm and save the input values
-// function confirmSaveTokens(shouldSave) {
-//     const modal = document.getElementById("inputTokenConfirmModal");
-//     modal.classList.add("hidden");
-
-//     if (shouldSave) {
-//         // Get the input values
-//         const inputToken1 = document.getElementById("inputToken1").value;
-//         const inputToken2 = document.getElementById("inputToken2").value;
-
-//         console.log(inputToken1, inputToken2);
-
-//         // Perform the save operation here
-//         // You can send the values to your server, update the UI, etc.
-//         // Example: saveTokens(inputToken1, inputToken2);
-
-//         // Clear the input fields if needed
-//         document.getElementById("inputToken1").value = "";
-//         document.getElementById("inputToken2").value = "";
-//     }
-// }
-
-// // Attach a click event listener to the "Save" button to trigger the confirmation modal
-// const saveButton = document.querySelector(".save-button");
-// saveButton.addEventListener("click", TokenOpenModal);
-
-
-
-
-
-// Function to open the confirmation modal
-function TokenOpenModal() {
-    const modal = document.getElementById("inputTokenConfirmModal");
-    modal.classList.remove("hidden");
+async function fetchData() {
+    try {
+        const response = await fetch('https://gist.githubusercontent.com/toushik018/473f31c780bceed8f66730ebc1cbada7/raw/031536b36b7d8d470619016821003793e1dc2b63/gistfile1.txt');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error while fetching data:', error);
+    }
 }
 
-// Function to confirm and save the input values
-function confirmSaveTokens(shouldSave) {
-    const modal = document.getElementById("inputTokenConfirmModal");
-    modal.classList.add("hidden");
+// Function to populate input fields with default values
+async function populateInputFields() {
+    const data = await fetchData();
 
-    if (shouldSave) {
-        // Get the input values
-        const inputToken1 = document.getElementById("inputToken1").value;
-        const inputToken2 = document.getElementById("inputToken2").value;
+    if (data) {
+        document.getElementById('div1').value = data.distribution['panda-eds']?.div || 0;
+        document.getElementById('opt1').value = data.distribution['panda-eds']?.opt || 0;
 
-        // Perform the save operation here
-        // You can send the values to your server, update the UI, etc.
+        document.getElementById('div2').value = data.distribution['panda-bro']?.div || 0;
+        document.getElementById('opt2').value = data.distribution['panda-bro']?.opt || 0;
 
-        // Construct the data to send to the API
-        const data = {
-            token1: inputToken1,
-            token2: inputToken2
-        };
+        document.getElementById('opt3').value = data.distribution['panda-workerbee']?.opt || 0;
 
-        // Make a POST request to your API
-        fetch('http://127.0.0.1/api/tokens', {
+        // Populate management hive fields
+        const hiveData = data.management.hive;
+        renderHiveEntries(hiveData);
+        console.log(hiveData);
+
+        // Populate management panda token fields
+        const tokenData = data.management.token;
+        renderTokenEntries(tokenData);
+
+    }
+}
+
+
+// Function to render hive entries
+function renderHiveEntries(hiveData) {
+
+    const hiveEntriesContainer = document.getElementById('hiveEntries');
+    hiveEntriesContainer.innerHTML = ''; // Clear existing entries
+
+    hiveData.forEach(entry => {
+        const key = Object.keys(entry)[0];
+        const value = entry[key];
+        const entryHTML = `
+        <div class="w-full mx-auto">
+        <div class="flex items-center justify-evenly py-2">
+            <label for="${key}" class="block text-gray-700 dark:text-gray-100 font-semibold mb-2" style="width: 30%">
+                <p>${key}</p>
+            </label>
+            <input type="number" value="${value}" id="${key}" data-name="${key}" class="hive-input w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" style="width: 70%" required>
+            <div class="text-gray-500 py-2 px-2">
+                <i class="fas fa-percent"></i>
+            </div>
+        </div>
+    </div>
+    
+        `;
+        hiveEntriesContainer.insertAdjacentHTML('beforeend', entryHTML);
+    });
+}
+
+
+// Function to render token entries
+function renderTokenEntries(tokenData) {
+    const tokenEntriesContainer = document.getElementById('tokenEntries');
+    tokenEntriesContainer.innerHTML = '';
+
+    tokenData.forEach(entry => {
+        const key = Object.keys(entry)[0];
+        const value = entry[key];
+        const entryHTML = `
+        <div class="w-full mx-auto">
+        <div class="flex items-center justify-evenly py-2">
+            <label for="input" class="block text-gray-700 dark:text-gray-100 font-semibold mb-2" style="width: 30%">
+                <p>${key}</p>
+            </label>
+            <input type="number" value="${value}" id="${key}" data-name="${key}" class="token-input w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" style="width: 70%" required>
+            <div class="text-gray-500 py-2 px-2">
+                <i class="fas fa-percent"></i>
+            </div>
+        </div>
+    </div>
+        `;
+        tokenEntriesContainer.insertAdjacentHTML('beforeend', entryHTML);
+    });
+}
+
+
+
+// // for panda-eds data
+// function savePandaEds() {
+//     const divValue = document.getElementById('div1').value;
+//     const optValue = document.getElementById('opt1').value;
+//     console.log(divValue, optValue);
+// }
+
+// Function to save Panda Eds data
+function savePandaEds() {
+    const divValue = document.getElementById('div1').value;
+    const optValue = document.getElementById('opt1').value;
+
+    // Constructing the data object
+    const data = {
+        schema: "distribution",
+        data: {
+            "panda-eds": { div: parseInt(divValue), opt: parseInt(optValue) }
+        }
+    };
+
+    // Logging the data for debugging
+    console.log('Panda Eds Data:', data);
+
+    // Sending the data to the backend API
+    postData('http://localhost/api/save_settings', data);
+}
+
+
+
+// // for panda bro
+// function savePandaBro() {
+//     const divValue = document.getElementById('div2').value;
+//     const optValue = document.getElementById('opt2').value;
+//     console.log(divValue, optValue);
+
+//     // Perform any further actions with the obtained values, such as sending them to an API
+//     // Example: fetch('https://example.com/save-panda-eds', { method: 'POST', body: JSON.stringify({ div: divValue, opt: optValue }) })
+// }
+
+// // for panda worker bee
+// function pandaWorkerBee() {
+//     const optValue = document.getElementById('opt3').value;
+//     console.log(optValue);
+
+// }
+
+
+// Function to save Panda Bro data
+function savePandaBro() {
+    const divValue = document.getElementById('div2').value;
+    const optValue = document.getElementById('opt2').value;
+
+    // Constructing the data object
+    const data = {
+        schema: "distribution",
+        data: {
+            "panda-bro": { div: parseInt(divValue), opt: parseInt(optValue) }
+        }
+    };
+
+    // Logging the data for debugging
+    console.log('Panda Bro Data:', data);
+
+    // Sending the data to the backend API
+    postData('http://localhost/api/save_settings', data);
+}
+
+// Function to save Panda Worker Bee data
+function pandaWorkerBee() {
+    const optValue = document.getElementById('opt3').value;
+
+    // Constructing the data object
+    const data = {
+        schema: "distribution",
+        data: {
+            "panda-workerbee": { opt: parseInt(optValue) }
+        }
+    };
+
+    // Logging the data for debugging
+    console.log('Panda Worker Bee Data:', data);
+
+    // Sending the data to the backend API
+    postData('http://localhost/api/save_settings', data);
+}
+
+
+
+// A Function to send POST request to the backend
+async function postData(url = '', data = {}) {
+    try {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response from the API
-            console.log(data);
-        })
-        .catch(error => {
-            // Handle any errors
-            console.error('Error:', error);
+            body: JSON.stringify(data)
         });
+        const responseData = await response.json();
 
-        // Clear the input fields if needed
-        document.getElementById("inputToken1").value = "";
-        document.getElementById("inputToken2").value = "";
-    }
-}
-
-// Attach a click event listener to the "Save" button to trigger the confirmation modal
-const saveButton = document.querySelector(".save-button");
-saveButton.addEventListener("click", TokenOpenModal);
-
-
-
-
-
-// ---------------------------------------- //
-
-
-// First card's js'
-
-const investment = [
-    { token: "eds", acc: { div: 50, opt: 30 } },
-    { token: "hive", acc: { opt: 10 } }
-    // Add more data as needed
-];
-
-// Initialize token names in the <p> tags
-document.getElementById('TokenSetting1').textContent = investment[0].token;
-document.getElementById('TokenSetting2').textContent = investment[1].token;
-
-function openModal(index) {
-    // Find the investment data for the specified index
-    const investmentData = investment[index - 1]; // Subtract 1 to match the array index
-
-    if (investmentData) {
-        // Populate the modal with investment data
-        document.getElementById('modalTokenNameLabel').textContent = "Token Name: " + investmentData.token;
-        document.getElementById('modalTokenName').textContent = investmentData.token;
-
-        // Clear existing input fields in the modal
-        const modalInputsContainer = document.getElementById('modalInputsContainer');
-        modalInputsContainer.innerHTML = ''; // Clear existing content
-
-        // Create and append input fields for each value in acc
-        for (const key in investmentData.acc) {
-            if (Object.hasOwnProperty.call(investmentData.acc, key)) {
-                const value = investmentData.acc[key];
-                const inputField = document.createElement('div');
-                inputField.className = 'text-center p-1 flex items-center gap-2';
-                inputField.innerHTML = `
-                    <label class="block text-gray-700 dark:text-gray-100 font-semibold mb-2">${key}:</label>
-                    <input type="number" id="modalToken${key}" name="modalToken${key}" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" value="${value}" required>
-                    <i class="fas fa-percent"></i>
-                `;
-                modalInputsContainer.appendChild(inputField);
-            }
-        }
-
-        document.getElementById('myModal').classList.remove('hidden');
-    }
-}
-
-
-
-
-
-
-
-function closeModal() {
-    document.getElementById('myModal').classList.add('hidden');
-}
-
-function saveToken() {
-    const tokenName = document.getElementById('modalTokenName').textContent;
-
-    // Access and parse the input fields based on their IDs
-    const divValueInput = document.getElementById('modalTokendiv');
-    const optValueInput = document.getElementById('modalTokenopt');
-    
-
-    // Check if either div or opt input field is not null
-    if (divValueInput || optValueInput) {
-        let divValue, optValue;
-
-        // Get the values from the input fields if they exist
-        if (divValueInput) {
-            divValue = parseInt(divValueInput.value);
-        }
-        if (optValueInput) {
-            optValue = parseInt(optValueInput.value);
-        }
-
-        // Check if parsing was successful and values are not NaN
-        if ((!isNaN(divValue) || !isNaN(optValue)) && (divValue >= 0 || optValue >= 0)) {
-            // Create a payload object with the parsed values to send to the API
-            const payload = {};
-
-            if (!isNaN(divValue) && divValue >= 0) {
-                payload.div = divValue;
-            }
-
-            if (!isNaN(optValue) && optValue >= 0) {
-                payload.opt = optValue;
-            }
-
-            // Send a POST request to the API with the payload
-            fetch(`/api/investment/${tokenName}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            })
-            .then(response => {
-                if (response.ok) {
-                  
-                    console.log(`Successfully saved ${tokenName} settings.`);
-                } else {
-                   
-                    console.error(`Failed to save ${tokenName} settings.`);
-                }
-            })
-            .catch(error => {
-                console.error('An error occurred while saving settings:', error);
-                
-            });
+        // Update error message and background color based on success status
+        const errorContainer = document.querySelector('.error-container');
+        if (responseData.success) {
+            errorContainer.style.backgroundColor = 'green';
+            errorContainer.querySelector('p').textContent = 'Saved data successfully';
         } else {
-            
-            console.error('Invalid input. Please enter valid non-negative numbers for Div and Opt values.');
+            errorContainer.style.backgroundColor = 'red';
+            errorContainer.querySelector('p').textContent = 'Percentage has to be between 1 to 100';
         }
-    } else {
-        
-        console.error('Both Div and Opt input fields are missing.');
-    }
 
-    closeModal();
-}
-
-
-
-
-
-
-//--------------------------------//
-
-
-
-
-
-// Function to open the add entry modal
-function openAddEntryModal() {
-    document.getElementById('addEntryModal').classList.remove('hidden');
-}
-
-// Function to close the add entry modal
-function closeAddEntryModal() {
-    document.getElementById('addEntryModal').classList.add('hidden');
-}
-
-
-//  object to store the entries
-const entries = {};
-
-// Function to add a new entry
-function addNewEntry() {
-    const newName = document.getElementById('newEntryName').value.trim();
-    const newValue = document.getElementById('newEntryValue').value.trim();
-
-    if (newName !== '' && newValue !== '') {
-        // Add the new entry to the entries object
-        entries[newName] = parseFloat(newValue);
-
-        // Create a new entry container with a unique class
-        const newEntryContainer = document.createElement('div');
-        const uniqueClass = `entry-${new Date().getTime()}`; // Generate a unique class
-        newEntryContainer.className = `flex items-center gap-2 ${uniqueClass}`;
-        newEntryContainer.innerHTML = `
-            <label for="${uniqueClass}" class="block text-gray-700 font-semibold mb-2 dark:text-gray-100">${newName}</label>
-            <input type="number" id="${uniqueClass}" name="${uniqueClass}" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" value="${newValue}" required>
-            <div class="text-gray-500 py-2 px-2 flex gap-3">
-                <i class="fas fa-percent"></i>
-                <i class="fas fa-times cursor-pointer" onclick="removeEntry('${uniqueClass}')"></i>
-            </div>
-        `;
-
-        // Append the new entry container to the appropriate div
-        const entriesContainer = document.querySelector('.entryContainer');
-        entriesContainer.appendChild(newEntryContainer);
-
-        // Reset the form elements
-        document.getElementById('newEntryName').value = '';
-        document.getElementById('newEntryValue').value = '';
-
-        closeAddEntryModal();
-    } else {
-        alert('Both Name and Value fields must be filled.');
-    }
-}
-
-// Function to remove an entry by its unique class
-function removeEntry(uniqueClass) {
-    // Find the entry container with the specified unique class
-    const entryContainer = document.querySelector(`.${uniqueClass}`);
-    
-    if (entryContainer) {
-        // Remove the entry container from the DOM
-        entryContainer.remove();
+        return responseData;
+    } catch (error) {
+        console.error('Error while posting data:', error);
+        const errorContainer = document.querySelector('.error-container');
+        errorContainer.style.backgroundColor = 'red';
+        errorContainer.querySelector('p').textContent = 'Error while posting data. Please try again later.';
     }
 }
 
 
 
-// Function to save entries to the API
-function saveEntries() {
-    // Show the confirmation modal
-    document.getElementById('confirmationModal').classList.remove('hidden');
+// For management hive and panda Token
+function saveHive() {
+    const hiveInputs = document.querySelectorAll('.hive-input');
+    const hiveData = {
+        schema: "management-hive",
+        data: {}
+    };
+
+    hiveInputs.forEach(input => {
+        const name = input.getAttribute('data-name');
+        const value = parseFloat(input.value);
+        hiveData.data[name] = value;
+
+    });
+    console.log(hiveData);
+    // Send hiveData to the backend API
+    postData('http://localhost:/api/save_settings', hiveData)
+        .then(data => {
+            console.log('Response from server:', data);
+        });
+
 }
 
-// Function to confirm the save operation
-function confirmSave(confirmed) {
-    // Hide the confirmation modal
-    document.getElementById('confirmationModal').classList.add('hidden');
+function savePandaToken() {
+    const tokenInputs = document.querySelectorAll('.token-input');
+    const tokenData = {
+        schema: "management-token",
+        data: {}
+    };
 
-    if (confirmed) {
-        // Convert the entries object to JSON
-        const jsonEntries = JSON.stringify(entries);
-
-        // Send a POST request to the API with the JSON data
-        fetch('/api/management', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: jsonEntries,
-        })
-            .then(response => {
-                if (response.ok) {
-                    // Request was successful
-                    console.log('Successfully saved entries to the API.');
-                } else {
-                    // Handle errors or show a message to the user
-                    console.error('Failed to save entries to the API.');
-                }
-            })
-            .catch(error => {
-                console.error('An error occurred while saving entries:', error);
-                // You can display an error message to the user
-            });
-    } else {
-        // User canceled the save operation
-        console.log('Save operation canceled by the user.');
-    }
-}
+    tokenInputs.forEach(input => {
+        const name = input.getAttribute('data-name');
+        const value = parseFloat(input.value);
+        tokenData.data[name] = value;
+    });
 
 
-
-
-
-
-
-
-
-//------------------------------------//
-
-
-
-
-
-
-
-
-
-
-
-// Function to open the add entry modal 2
-function openAddEntryModal2() {
-    document.getElementById('addEntryModal2').classList.remove('hidden');
-}
-
-// Function to close the add entry modal
-function closeAddEntryModal2() {
-    document.getElementById('addEntryModal2').classList.add('hidden');
-}
-
-//  object to store the entries
-const entries2 = {};
-
-// Function to add a new entry for the second section
-function addNewEntry2() {
-    const newName = document.getElementById('newEntryName2').value.trim();
-    const newValue = document.getElementById('newEntryValue2').value.trim();
-
-    if (newName !== '' && newValue !== '') {
-        // Add the new entry to the entries2 object
-        entries2[newName] = parseFloat(newValue);
-
-        // Create a new entry container with a unique class
-        const newEntryContainer = document.createElement('div');
-        const uniqueClass = `entry2-${new Date().getTime()}`; // Generate a unique class
-        newEntryContainer.className = `flex items-center gap-2 ${uniqueClass}`;
-        newEntryContainer.innerHTML = `
-            <label for="${uniqueClass}" class="block text-gray-700 font-semibold mb-2 dark:text-gray-100">${newName}</label>
-            <input type="number" id="${uniqueClass}" name="${uniqueClass}" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" value="${newValue}" required>
-            <div class="text-gray-500 py-2 px-2 flex gap-3">
-                <i class="fas fa-percent"></i>
-                <i class="fas fa-times cursor-pointer" onclick="removeEntry2('${uniqueClass}')"></i>
-            </div>
-        `;
-
-        // Append the new entry container to the appropriate div for the second section
-        const entriesContainer = document.querySelector('.entryContainer2');
-        entriesContainer.appendChild(newEntryContainer);
-
-        // Reset the form elements
-        document.getElementById('newEntryName2').value = '';
-        document.getElementById('newEntryValue2').value = '';
-
-        closeAddEntryModal2();
-    } else {
-        alert('Both Name and Value fields must be filled.');
-    }
-}
-
-// Function to remove an entry from the second section by its unique class
-function removeEntry2(uniqueClass) {
-    // Find the entry container with the specified unique class for the second section
-    const entryContainer = document.querySelector(`.${uniqueClass}`);
-    
-    if (entryContainer) {
-        // Remove the entry container from the DOM
-        entryContainer.remove();
-    }
-}
-
-
-
-
-function saveEntries2() {
-    // Show the confirmation modal
-    document.getElementById('confirmationModal2').classList.remove('hidden');
-}
-
-
-
-
-// Function to confirm the save operation
-function confirmSave2(confirmed) {
-    // Hide the confirmation modal
-    document.getElementById('confirmationModal2').classList.add('hidden');
-
-    if (confirmed) {
-        // Convert the entries object to JSON
-        const jsonEntries = JSON.stringify(entries2);
-
-        // Send a POST request to the API with the JSON data
-        fetch('/api/management', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: jsonEntries,
-        })
-            .then(response => {
-                if (response.ok) {
-                    // Request was successful
-                    console.log('Successfully saved entries to the API.');
-                } else {
-                    // Handle errors or show a message to the user
-                    console.error('Failed to save entries to the API.');
-                }
-            })
-            .catch(error => {
-                console.error('An error occurred while saving entries:', error);
-                // You can display an error message to the user
-            });
-    } else {
-        // User canceled the save operation
-        console.log('Save operation canceled by the user.');
-    }
-}
-
-
-// // Function to save entries to the API
-// function saveEntries2() {
-//     // Convert the entries object to JSON
-//     const jsonEntries = JSON.stringify(entries2);
-
-//     // Send a POST request to the API with the JSON data
-//     fetch('/api/management', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: jsonEntries,
-//     })
-//         .then(response => {
-//             if (response.ok) {
-//                 // Request was successful
-//                 console.log('Successfully saved entries to the API.');
-//             } else {
-//                 // Handle errors or show a message to the user
-//                 console.error('Failed to save entries to the API.');
-//             }
-//         })
-//         .catch(error => {
-//             console.error('An error occurred while saving entries:', error);
-//             // You can display an error message to the user
-//         });
-// }
-
-
-
-
-
-//--------------------------------------------//
-
-
-
-// Open the Distribute Modal
-function openDistributeModal() {
-    const distributeModal = document.getElementById('distributeModal');
-    distributeModal.classList.remove('hidden');
-}
-
-// Close the Distribute Modal
-function closeDistributeModal() {
-    const distributeModal = document.getElementById('distributeModal');
-    distributeModal.classList.add('hidden');
-}
-
-// Confirm the distribution and execute the distributeTokens function
-function confirmDistribute(confirm) {
-    if (confirm) {
-        distributeTokens();
-    }
-    closeDistributeModal();
-}
-
-// Distribute functionality
-function distributeTokens() {
-    fetch('/api/distribute', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ distribute: true }),
-    })
-        .then(response => {
-            if (response.ok) {
-                // Distribution successful, refresh the page
-                window.location.reload();
-            } else {
-                // Handle errors or show a message to the user
-                console.error('Failed to distribute tokens.');
-                // You can display an error message here
-            }
-        })
-        .catch(error => {
-            console.error('An error occurred while distributing tokens:', error);
-            // You can display an error message here
+    console.log('Token Data:', tokenData);
+    // Send token to the backend API
+    postData('http://localhost:/api/save_settings', tokenData)
+        .then(data => {
+            console.log('Response from server:', data);
         });
 }
 
 
+// Calling the function
+populateInputFields();
 
-// function distributeTokens() {
-//     // Simulate distributing tokens by setting a variable to true
-//     const distributeData = { distribute: true };
 
-//     // Refresh the page
-//     window.location.reload();
-// }
+// Function to open the "Add Hive" modal
+function openAddHiveModal() {
+    document.getElementById('addHiveModal').classList.remove('hidden');
+}
+
+// Function to close the "Add Hive" modal
+function closeAddHiveModal() {
+    document.getElementById('addHiveModal').classList.add('hidden');
+}
+
+// Function to open the "Add Panda Token" modal
+function openAddPandaTokenModal() {
+    document.getElementById('addPandaTokenModal').classList.remove('hidden');
+}
+
+// Function to close the "Add Panda Token" modal
+function closeAddPandaTokenModal() {
+    document.getElementById('addPandaTokenModal').classList.add('hidden');
+}
+
+
+// Function to add a new entry to management hive
+function addHive() {
+    const name = document.getElementById('newEntryName2').value;
+    const value = document.getElementById('newEntryValue2').value;
+
+    // Create a new entry HTML
+    const entryHTML = `
+        <div class="w-full mx-auto">
+            <div class="flex items-center justify-evenly py-2">
+                <label for="input" class="block text-gray-700 dark:text-gray-100 font-semibold mb-2" style="width: 30%">
+                    <p>${name}</p>
+                </label>
+                <input type="number" value="${value}" data-name="${name}" class="hive-input new-hive-input w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" style="width: 70%" required>
+                <div class="text-gray-500 py-2 px-2">
+                    <i class="fas fa-percent"></i>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Append the new entry HTML to the hive entries container
+    document.getElementById('hiveEntries').insertAdjacentHTML('beforeend', entryHTML);
+
+    // Close the modal
+    closeAddHiveModal();
+}
+
+// Function to add a new entry to management panda token
+function addPandaToken() {
+    const name = document.getElementById('newEntryName1').value;
+    const value = document.getElementById('newEntryValue1').value;
+
+    // Create a new entry HTML
+    const entryHTML = `
+        <div class="w-full mx-auto">
+            <div class="flex items-center justify-evenly py-2">
+                <label for="input" class="block text-gray-700 dark:text-gray-100 font-semibold mb-2" style="width: 30%">
+                    <p>${name}</p>
+                </label>
+                <input type="number" value="${value}" data-name="${name}" class="token-input w-full px-4 py-2 border rounded-md focus:outline-none focus:border-gray-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100" style="width: 70%" required>
+                <div class="text-gray-500 py-2 px-2">
+                    <i class="fas fa-percent"></i>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Append the new entry HTML to the panda token entries container
+    document.getElementById('tokenEntries').insertAdjacentHTML('beforeend', entryHTML);
+
+    // Close the modal
+    closeAddPandaTokenModal();
+}
