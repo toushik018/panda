@@ -1,3 +1,69 @@
+// Function to display confirmation modal and handle confirmation
+function showConfirmationModal(message, callback) {
+    // Get the confirmation modal elements
+    const confirmationModal = document.getElementById('confirmationModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const confirmYesBtn = document.getElementById('confirmYesBtn');
+    const confirmNoBtn = document.getElementById('confirmNoBtn');
+
+    // Set confirmation message
+    modalMessage.textContent = message;
+
+    // Function to handle the save confirmation
+    function handleSaveConfirmation(confirmed) {
+        if (confirmed) {
+            // Call the callback function
+            callback();
+        }
+
+        // Close the confirmation modal
+        confirmationModal.classList.add('hidden');
+    }
+
+    // Display the confirmation modal
+    confirmationModal.classList.remove('hidden');
+    confirmYesBtn.addEventListener('click', () => handleSaveConfirmation(true));
+    confirmNoBtn.addEventListener('click', () => handleSaveConfirmation(false));
+}
+
+
+
+
+// A Function to send POST request to the backend
+async function postData(url = '', data = {}) {
+    console.log(data, "incoming data");
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        const responseData = await response.json();
+
+        // Update error message and background color based on success status
+        const errorContainer = document.querySelector('.error-container');
+        if (responseData.success) {
+            errorContainer.style.backgroundColor = 'green';
+            errorContainer.querySelector('p').textContent = 'Saved data successfully';
+        } else {
+            errorContainer.style.backgroundColor = 'red';
+            errorContainer.querySelector('p').textContent = 'Percentage has to be between 1 to 100';
+        }
+
+        return responseData;
+    } catch (error) {
+        console.error('Error while posting data:', error);
+        const errorContainer = document.querySelector('.error-container');
+        errorContainer.style.backgroundColor = 'red';
+        errorContainer.querySelector('p').textContent = 'Error while posting data. Please try again later.';
+    }
+}
+
+
+
+
 async function fetchData() {
     try {
         const response = await fetch('https://gist.githubusercontent.com/toushik018/473f31c780bceed8f66730ebc1cbada7/raw/031536b36b7d8d470619016821003793e1dc2b63/gistfile1.txt');
@@ -89,12 +155,6 @@ function renderTokenEntries(tokenData) {
 
 
 
-// // for panda-eds data
-// function savePandaEds() {
-//     const divValue = document.getElementById('div1').value;
-//     const optValue = document.getElementById('opt1').value;
-//     console.log(divValue, optValue);
-// }
 
 // Function to save Panda Eds data
 function savePandaEds() {
@@ -112,28 +172,38 @@ function savePandaEds() {
     // Logging the data for debugging
     console.log('Panda Eds Data:', data);
 
-    // Sending the data to the backend API
-    postData('http://localhost/api/save_settings', data);
+
+
+    function savePandaEdsData() {
+        // Sending the data to the backend API
+        postData('http://localhost/api/save_settings', data);
+    }
+    showConfirmationModal("Are you sure you want to save Panda Eds?", savePandaEdsData);
 }
 
 
 
-// // for panda bro
+
+// // Function to save Panda Bro data
 // function savePandaBro() {
 //     const divValue = document.getElementById('div2').value;
 //     const optValue = document.getElementById('opt2').value;
-//     console.log(divValue, optValue);
 
-//     // Perform any further actions with the obtained values, such as sending them to an API
-//     // Example: fetch('https://example.com/save-panda-eds', { method: 'POST', body: JSON.stringify({ div: divValue, opt: optValue }) })
+//     // Constructing the data object
+//     const data = {
+//         schema: "distribution",
+//         data: {
+//             "panda-bro": { div: parseInt(divValue), opt: parseInt(optValue) }
+//         }
+//     };
+
+//     // Logging the data for debugging
+//     console.log('Panda Bro Data:', data);
+
+//     // Sending the data to the backend API
+//     postData('http://localhost/api/save_settings', data);
 // }
 
-// // for panda worker bee
-// function pandaWorkerBee() {
-//     const optValue = document.getElementById('opt3').value;
-//     console.log(optValue);
-
-// }
 
 
 // Function to save Panda Bro data
@@ -152,9 +222,16 @@ function savePandaBro() {
     // Logging the data for debugging
     console.log('Panda Bro Data:', data);
 
-    // Sending the data to the backend API
-    postData('http://localhost/api/save_settings', data);
+    // Callback function for saving Panda Bro data
+    function savePandaBroData() {
+        postData('http://localhost/api/save_settings', data);
+        console.log(data);
+    }
+
+    // Show confirmation modal and handle confirmation
+    showConfirmationModal("Are you sure you want to save Panda Bro?", savePandaBroData);
 }
+
 
 // Function to save Panda Worker Bee data
 function pandaWorkerBee() {
@@ -171,42 +248,16 @@ function pandaWorkerBee() {
     // Logging the data for debugging
     console.log('Panda Worker Bee Data:', data);
 
-    // Sending the data to the backend API
-    postData('http://localhost/api/save_settings', data);
-}
-
-
-
-// A Function to send POST request to the backend
-async function postData(url = '', data = {}) {
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        const responseData = await response.json();
-
-        // Update error message and background color based on success status
-        const errorContainer = document.querySelector('.error-container');
-        if (responseData.success) {
-            errorContainer.style.backgroundColor = 'green';
-            errorContainer.querySelector('p').textContent = 'Saved data successfully';
-        } else {
-            errorContainer.style.backgroundColor = 'red';
-            errorContainer.querySelector('p').textContent = 'Percentage has to be between 1 to 100';
-        }
-
-        return responseData;
-    } catch (error) {
-        console.error('Error while posting data:', error);
-        const errorContainer = document.querySelector('.error-container');
-        errorContainer.style.backgroundColor = 'red';
-        errorContainer.querySelector('p').textContent = 'Error while posting data. Please try again later.';
+    // Callback function for saving Panda Worker Bee data
+    function savePandaWorkerBeeData() {
+        postData('http://localhost/api/save_settings', data);
     }
+
+    // Show confirmation modal and handle confirmation
+    showConfirmationModal("Are you sure you want to save Panda Worker Bee?", savePandaWorkerBeeData);
 }
+
+
 
 
 
@@ -225,11 +276,14 @@ function saveHive() {
 
     });
     console.log(hiveData);
-    // Send hiveData to the backend API
-    postData('http://localhost:/api/save_settings', hiveData)
-        .then(data => {
-            console.log('Response from server:', data);
-        });
+
+
+    function saveHiveData() {
+        // Send hiveData to the backend API
+        postData('http://localhost:/api/save_settings', hiveData)
+    }
+
+    showConfirmationModal("Are you sure you want to save the Hive Data?", saveHiveData);
 
 }
 
@@ -248,17 +302,41 @@ function savePandaToken() {
 
 
     console.log('Token Data:', tokenData);
-    // Send token to the backend API
-    postData('http://localhost:/api/save_settings', tokenData)
-        .then(data => {
-            console.log('Response from server:', data);
-        });
+
+
+    function saveTokenData() {
+        // Send token to the backend API
+        postData('http://localhost:/api/save_settings', tokenData)
+    }
+
+    showConfirmationModal("Are you sure you want to save the Token Data?", saveTokenData);
+
+}
+
+
+// Function to distribute
+function distribute() {
+    // Callback function for distributing
+    function distributeData() {
+        const data = {
+            distribute: true
+        };
+
+        // Perform the distribute action here
+        postData('http://localhost/api/distribute', data);
+        console.log(data);
+    }
+
+    // Show confirmation modal and handle confirmation
+    showConfirmationModal("Are you sure you want to distribute?", distributeData);
 }
 
 
 // Calling the function
 populateInputFields();
 
+
+// --------------///
 
 // Function to open the "Add Hive" modal
 function openAddHiveModal() {
