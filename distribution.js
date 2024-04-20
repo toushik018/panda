@@ -11,21 +11,27 @@ function showConfirmationModal(message, callback) {
 
     // Function to handle the save confirmation
     function handleSaveConfirmation(confirmed) {
+        // Close the confirmation modal
+        confirmationModal.classList.add('hidden');
+
+        // Call the callback function only when confirmed is true
         if (confirmed) {
-            // Call the callback function
             callback();
         }
+    }
 
-        // Close the confirmation modal
+    // Function to hide the confirmation modal
+    function hideConfirmationModal() {
         confirmationModal.classList.add('hidden');
     }
 
     // Display the confirmation modal
     confirmationModal.classList.remove('hidden');
-    confirmYesBtn.addEventListener('click', () => handleSaveConfirmation(true));
-    confirmNoBtn.addEventListener('click', () => handleSaveConfirmation(false));
-}
 
+    // Add event listeners for confirmation buttons
+    confirmYesBtn.addEventListener('click', () => handleSaveConfirmation(true));
+    confirmNoBtn.addEventListener('click', hideConfirmationModal);
+}
 
 
 
